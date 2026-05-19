@@ -1,2 +1,2 @@
-# raws_utils
+# RAWS
 Repository with various utilities for the Re-Analysis of Water for Society (RAWS) project
