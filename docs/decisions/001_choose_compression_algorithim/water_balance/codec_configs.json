@@ -1,0 +1,68 @@
+[
+  {
+    "label": "no-compression",
+    "family": "lossless",
+    "lossy": false,
+    "enabled": true,
+    "filters": [],
+    "compressors": [],
+    "serializer": null
+  },
+  {
+    "label": "zlib-4",
+    "family": "lossless",
+    "lossy": false,
+    "enabled": true,
+    "filters": [],
+    "compressors": [{"type": "GzipCodec", "params": {"level": 4}}],
+    "serializer": null
+  },
+
+  {
+    "label": "bitround-14+zstd",
+    "family": "BitRound",
+    "lossy": true,
+    "enabled": true,
+    "note": "BitRound + zstd",
+    "filters": [{"type": "BitRound", "params": {"keepbits": 14}}],
+    "compressors": [{"type": "ZstdCodec", "params": {"level": 3}}],
+    "serializer": null
+  },
+  {
+    "label": "bitround-10+zstd",
+    "family": "BitRound",
+    "lossy": true,
+    "enabled": true,
+    "filters": [{"type": "BitRound", "params": {"keepbits": 10}}],
+    "compressors": [{"type": "ZstdCodec", "params": {"level": 3}}],
+    "serializer": null
+  },
+  {
+    "label": "bitround-6+zstd",
+    "family": "BitRound",
+    "lossy": true,
+    "enabled": true,
+    "filters": [{"type": "BitRound", "params": {"keepbits": 6}}],
+    "compressors": [{"type": "ZstdCodec", "params": {"level": 3}}],
+    "serializer": null
+  },
+  {
+    "label": "bitround-14+pco",
+    "family": "BitRound",
+    "lossy": true,
+    "enabled": true,
+    "note": "BitRound + PCO",
+    "filters": [{"type": "BitRound", "params": {"keepbits": 14}}],
+    "compressors": [],
+    "serializer": {"type": "PCodec", "params": {"level": 8}}
+  },
+  {
+    "label": "bitround-10+pco",
+    "family": "BitRound",
+    "lossy": true,
+    "enabled": true,
+    "filters": [{"type": "BitRound", "params": {"keepbits": 10}}],
+    "compressors": [],
+    "serializer": {"type": "PCodec", "params": {"level": 8}}
+  }
+]
