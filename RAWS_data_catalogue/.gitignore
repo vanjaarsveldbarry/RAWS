@@ -1,0 +1,14 @@
+# Generated: symlinks into the real data, and the domains cut out of them.
+# Never in git -- manifest.yml, testcases.yml and the scripts are the history.
+CATALOGUE/
+build_hash.log
+
+# pixi environment
+.pixi/
+
+# python bytecode
+__pycache__/
+
+CATALOGUE/
+CLAUDE.md
+.pixi/

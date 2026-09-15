@@ -1,0 +1,26 @@
+# Environment for the catalogue and its test cases.
+#
+#   pixi install          once
+#   ./create_catalogue.sh
+#   ./create_testcase.sh
+#
+# Versions are pinned to the ones this data was processed with. pcraster and gdal
+# are what write and read the .map clone/landmask pair; netcdf4, zarr and xarray
+# are what the slab croppers cut netCDF and zarr stores with.
+
+[workspace]
+name = "RAWS_data_catalogue"
+authors = ["vanjaarsveldbarry <a.s.vanjaarsveld@uu.nl>"]
+channels = ["conda-forge"]
+platforms = ["linux-64"]
+version = "0.1.0"
+
+[dependencies]
+python = ">=3.14,<3.15"
+pcraster = ">=4.4.3,<5"
+gdal = ">=3.13,<4"
+numpy = ">=2.5,<3"
+netcdf4 = ">=1.7,<2"
+zarr = ">=3.3,<4"
+xarray = "*"
+pyyaml = "*"
