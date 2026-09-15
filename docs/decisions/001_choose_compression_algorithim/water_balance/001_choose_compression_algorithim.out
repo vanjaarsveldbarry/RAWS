@@ -1,0 +1,198 @@
+  0%|          | 0/3 [00:00<?, ?it/s]Processing var: precipitation for dim: latitude:   0%|          | 0/3 [00:00<?, ?it/s]Processing var: precipitation for dim: latitude:  33%|███▎      | 1/3 [01:32<03:05, 92.62s/it]Processing var: total_evaporation for dim: latitude:  33%|███▎      | 1/3 [01:32<03:05, 92.62s/it]Processing var: total_evaporation for dim: latitude:  67%|██████▋   | 2/3 [03:03<01:31, 91.63s/it]Processing var: total_runoff for dim: latitude:  67%|██████▋   | 2/3 [03:03<01:31, 91.63s/it]     Processing var: total_runoff for dim: latitude: 100%|██████████| 3/3 [04:34<00:00, 91.24s/it]Processing var: total_runoff for dim: latitude: 100%|██████████| 3/3 [04:34<00:00, 91.45s/it]
+  0%|          | 0/3 [00:00<?, ?it/s]Processing var: precipitation for dim: longitude:   0%|          | 0/3 [00:00<?, ?it/s]Processing var: precipitation for dim: longitude:  33%|███▎      | 1/3 [01:31<03:03, 91.91s/it]Processing var: total_evaporation for dim: longitude:  33%|███▎      | 1/3 [01:31<03:03, 91.91s/it]Processing var: total_evaporation for dim: longitude:  67%|██████▋   | 2/3 [03:05<01:33, 93.06s/it]Processing var: total_runoff for dim: longitude:  67%|██████▋   | 2/3 [03:05<01:33, 93.06s/it]     Processing var: total_runoff for dim: longitude: 100%|██████████| 3/3 [04:37<00:00, 92.56s/it]Processing var: total_runoff for dim: longitude: 100%|██████████| 3/3 [04:37<00:00, 92.58s/it]
+17:41:19.821 | ERROR   | distributed.worker - Worker stream died during communication: tcp://127.0.0.1:45051
+Traceback (most recent call last):
+  File "/gpfs/work4/0/prjs1222/RAWS/RAWS/.pixi/envs/default/lib/python3.13/site-packages/tornado/iostream.py", line 861, in _read_to_buffer
+    bytes_read = self.read_from_fd(buf)
+  File "/gpfs/work4/0/prjs1222/RAWS/RAWS/.pixi/envs/default/lib/python3.13/site-packages/tornado/iostream.py", line 1113, in read_from_fd
+    return self.socket.recv_into(buf, len(buf))
+           ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^
+ConnectionResetError: [Errno 104] Connection reset by peer
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/gpfs/work4/0/prjs1222/RAWS/RAWS/.pixi/envs/default/lib/python3.13/site-packages/distributed/worker.py", line 2081, in gather_dep
+    response = await get_data_from_worker(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        rpc=self.rpc, keys=to_gather, worker=worker, who=self.address
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/gpfs/work4/0/prjs1222/RAWS/RAWS/.pixi/envs/default/lib/python3.13/site-packages/distributed/worker.py", line 2887, in get_data_from_worker
+    response = await send_recv(
+               ^^^^^^^^^^^^^^^^
+    ...<6 lines>...
+    )
+    ^
+  File "/gpfs/work4/0/prjs1222/RAWS/RAWS/.pixi/envs/default/lib/python3.13/site-packages/distributed/core.py", line 1018, in send_recv
+    response = await comm.read(deserializers=deserializers)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/gpfs/work4/0/prjs1222/RAWS/RAWS/.pixi/envs/default/lib/python3.13/site-packages/distributed/comm/tcp.py", line 237, in read
+    convert_stream_closed_error(self, e)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "/gpfs/work4/0/prjs1222/RAWS/RAWS/.pixi/envs/default/lib/python3.13/site-packages/distributed/comm/tcp.py", line 143, in convert_stream_closed_error
+    raise CommClosedError(f"in {obj}: {exc.__class__.__name__}: {exc}") from exc
+distributed.comm.core.CommClosedError: in <TCP (closed) Ephemeral Worker->Worker for gather local=tcp://127.0.0.1:32934 remote=tcp://127.0.0.1:45051>: ConnectionResetError: [Errno 104] Connection reset by peer
+17:42:20.927 | ERROR   | distributed.worker - Worker stream died during communication: tcp://127.0.0.1:42369
+Traceback (most recent call last):
+  File "/gpfs/work4/0/prjs1222/RAWS/RAWS/.pixi/envs/default/lib/python3.13/site-packages/distributed/comm/tcp.py", line 231, in read
+    buffer = await read_bytes_rw(stream, buffer_nbytes)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/gpfs/work4/0/prjs1222/RAWS/RAWS/.pixi/envs/default/lib/python3.13/site-packages/distributed/comm/tcp.py", line 367, in read_bytes_rw
+    actual = await stream.read_into(chunk)  # type: ignore[arg-type]
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tornado.iostream.StreamClosedError: Stream is closed
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/gpfs/work4/0/prjs1222/RAWS/RAWS/.pixi/envs/default/lib/python3.13/site-packages/distributed/worker.py", line 2081, in gather_dep
+    response = await get_data_from_worker(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        rpc=self.rpc, keys=to_gather, worker=worker, who=self.address
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/gpfs/work4/0/prjs1222/RAWS/RAWS/.pixi/envs/default/lib/python3.13/site-packages/distributed/worker.py", line 2887, in get_data_from_worker
+    response = await send_recv(
+               ^^^^^^^^^^^^^^^^
+    ...<6 lines>...
+    )
+    ^
+  File "/gpfs/work4/0/prjs1222/RAWS/RAWS/.pixi/envs/default/lib/python3.13/site-packages/distributed/core.py", line 1018, in send_recv
+    response = await comm.read(deserializers=deserializers)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/gpfs/work4/0/prjs1222/RAWS/RAWS/.pixi/envs/default/lib/python3.13/site-packages/distributed/comm/tcp.py", line 237, in read
+    convert_stream_closed_error(self, e)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "/gpfs/work4/0/prjs1222/RAWS/RAWS/.pixi/envs/default/lib/python3.13/site-packages/distributed/comm/tcp.py", line 137, in convert_stream_closed_error
+    raise CommClosedError(f"in {obj}: {exc}") from exc
+distributed.comm.core.CommClosedError: in <TCP (closed) Ephemeral Worker->Worker for gather local=tcp://127.0.0.1:36056 remote=tcp://127.0.0.1:42369>: Stream is closed
+17:42:40.889 | ERROR   | distributed.scheduler - Task finalize-hlgfinalizecompute-e2f7fc3c933c418f865003a638fe0f5a marked as failed because 4 workers died while trying to run it
+17:42:40.937 | ERROR   | distributed.worker - Worker stream died during communication: tcp://127.0.0.1:35247
+Traceback (most recent call last):
+  File "/gpfs/work4/0/prjs1222/RAWS/RAWS/.pixi/envs/default/lib/python3.13/site-packages/distributed/comm/tcp.py", line 226, in read
+    frames_nosplit_nbytes_bin = await stream.read_bytes(fmt_size)
+                                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tornado.iostream.StreamClosedError: Stream is closed
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/gpfs/work4/0/prjs1222/RAWS/RAWS/.pixi/envs/default/lib/python3.13/site-packages/distributed/worker.py", line 2081, in gather_dep
+    response = await get_data_from_worker(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        rpc=self.rpc, keys=to_gather, worker=worker, who=self.address
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/gpfs/work4/0/prjs1222/RAWS/RAWS/.pixi/envs/default/lib/python3.13/site-packages/distributed/worker.py", line 2887, in get_data_from_worker
+    response = await send_recv(
+               ^^^^^^^^^^^^^^^^
+    ...<6 lines>...
+    )
+    ^
+  File "/gpfs/work4/0/prjs1222/RAWS/RAWS/.pixi/envs/default/lib/python3.13/site-packages/distributed/core.py", line 1018, in send_recv
+    response = await comm.read(deserializers=deserializers)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/gpfs/work4/0/prjs1222/RAWS/RAWS/.pixi/envs/default/lib/python3.13/site-packages/distributed/comm/tcp.py", line 237, in read
+    convert_stream_closed_error(self, e)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "/gpfs/work4/0/prjs1222/RAWS/RAWS/.pixi/envs/default/lib/python3.13/site-packages/distributed/comm/tcp.py", line 137, in convert_stream_closed_error
+    raise CommClosedError(f"in {obj}: {exc}") from exc
+distributed.comm.core.CommClosedError: in <TCP (closed) Ephemeral Worker->Worker for gather local=tcp://127.0.0.1:59794 remote=tcp://127.0.0.1:35247>: Stream is closed
+17:42:41.755 | ERROR   | distributed.worker - Failed to communicate with scheduler during heartbeat.
+Traceback (most recent call last):
+  File "/gpfs/work4/0/prjs1222/RAWS/RAWS/.pixi/envs/default/lib/python3.13/site-packages/distributed/comm/tcp.py", line 226, in read
+    frames_nosplit_nbytes_bin = await stream.read_bytes(fmt_size)
+                                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tornado.iostream.StreamClosedError: Stream is closed
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/gpfs/work4/0/prjs1222/RAWS/RAWS/.pixi/envs/default/lib/python3.13/site-packages/distributed/worker.py", line 1273, in heartbeat
+    response = await retry_operation(
+               ^^^^^^^^^^^^^^^^^^^^^^
+    ...<14 lines>...
+    )
+    ^
+  File "/gpfs/work4/0/prjs1222/RAWS/RAWS/.pixi/envs/default/lib/python3.13/site-packages/distributed/utils_comm.py", line 416, in retry_operation
+    return await retry(
+           ^^^^^^^^^^^^
+    ...<5 lines>...
+    )
+    ^
+  File "/gpfs/work4/0/prjs1222/RAWS/RAWS/.pixi/envs/default/lib/python3.13/site-packages/distributed/utils_comm.py", line 395, in retry
+    return await coro()
+           ^^^^^^^^^^^^
+  File "/gpfs/work4/0/prjs1222/RAWS/RAWS/.pixi/envs/default/lib/python3.13/site-packages/distributed/core.py", line 1259, in send_recv_from_rpc
+    return await send_recv(comm=comm, op=key, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/gpfs/work4/0/prjs1222/RAWS/RAWS/.pixi/envs/default/lib/python3.13/site-packages/distributed/core.py", line 1018, in send_recv
+    response = await comm.read(deserializers=deserializers)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/gpfs/work4/0/prjs1222/RAWS/RAWS/.pixi/envs/default/lib/python3.13/site-packages/distributed/comm/tcp.py", line 237, in read
+    convert_stream_closed_error(self, e)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "/gpfs/work4/0/prjs1222/RAWS/RAWS/.pixi/envs/default/lib/python3.13/site-packages/distributed/comm/tcp.py", line 137, in convert_stream_closed_error
+    raise CommClosedError(f"in {obj}: {exc}") from exc
+distributed.comm.core.CommClosedError: in <TCP (closed) ConnectionPool.heartbeat_worker local=tcp://127.0.0.1:49152 remote=tcp://127.0.0.1:39107>: Stream is closed
+17:42:41.777 | ERROR   | distributed.worker - Failed to communicate with scheduler during heartbeat.
+Traceback (most recent call last):
+  File "/gpfs/work4/0/prjs1222/RAWS/RAWS/.pixi/envs/default/lib/python3.13/site-packages/distributed/comm/tcp.py", line 226, in read
+    frames_nosplit_nbytes_bin = await stream.read_bytes(fmt_size)
+                                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tornado.iostream.StreamClosedError: Stream is closed
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/gpfs/work4/0/prjs1222/RAWS/RAWS/.pixi/envs/default/lib/python3.13/site-packages/distributed/worker.py", line 1273, in heartbeat
+    response = await retry_operation(
+               ^^^^^^^^^^^^^^^^^^^^^^
+    ...<14 lines>...
+    )
+    ^
+  File "/gpfs/work4/0/prjs1222/RAWS/RAWS/.pixi/envs/default/lib/python3.13/site-packages/distributed/utils_comm.py", line 416, in retry_operation
+    return await retry(
+           ^^^^^^^^^^^^
+    ...<5 lines>...
+    )
+    ^
+  File "/gpfs/work4/0/prjs1222/RAWS/RAWS/.pixi/envs/default/lib/python3.13/site-packages/distributed/utils_comm.py", line 395, in retry
+    return await coro()
+           ^^^^^^^^^^^^
+  File "/gpfs/work4/0/prjs1222/RAWS/RAWS/.pixi/envs/default/lib/python3.13/site-packages/distributed/core.py", line 1259, in send_recv_from_rpc
+    return await send_recv(comm=comm, op=key, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/gpfs/work4/0/prjs1222/RAWS/RAWS/.pixi/envs/default/lib/python3.13/site-packages/distributed/core.py", line 1018, in send_recv
+    response = await comm.read(deserializers=deserializers)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/gpfs/work4/0/prjs1222/RAWS/RAWS/.pixi/envs/default/lib/python3.13/site-packages/distributed/comm/tcp.py", line 237, in read
+    convert_stream_closed_error(self, e)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "/gpfs/work4/0/prjs1222/RAWS/RAWS/.pixi/envs/default/lib/python3.13/site-packages/distributed/comm/tcp.py", line 137, in convert_stream_closed_error
+    raise CommClosedError(f"in {obj}: {exc}") from exc
+distributed.comm.core.CommClosedError: in <TCP (closed) ConnectionPool.heartbeat_worker local=tcp://127.0.0.1:37260 remote=tcp://127.0.0.1:39107>: Stream is closed
+Traceback (most recent call last):
+  File "/gpfs/work4/0/prjs1222/RAWS/RAWS/docs/decisions/001_choose_compression_algorithim/water_balance/informed_bitround.py", line 227, in <module>
+    xr.open_zarr(store_path, consolidated=True, chunks=final_dask_chunk_dict).load()
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "/gpfs/work4/0/prjs1222/RAWS/RAWS/.pixi/envs/default/lib/python3.13/site-packages/xarray/core/dataset.py", line 569, in load
+    evaluated_data: tuple[np.ndarray[Any, Any], ...] = chunkmanager.compute(
+                                                       ~~~~~~~~~~~~~~~~~~~~^
+        *chunked_data.values(), **kwargs
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/gpfs/work4/0/prjs1222/RAWS/RAWS/.pixi/envs/default/lib/python3.13/site-packages/xarray/namedarray/daskmanager.py", line 85, in compute
+    return compute(*data, **kwargs)  # type: ignore[no-untyped-call, no-any-return]
+  File "/gpfs/work4/0/prjs1222/RAWS/RAWS/.pixi/envs/default/lib/python3.13/site-packages/dask/base.py", line 685, in compute
+    results = schedule(expr, keys, **kwargs)
+  File "/gpfs/work4/0/prjs1222/RAWS/RAWS/.pixi/envs/default/lib/python3.13/site-packages/distributed/client.py", line 2431, in _gather
+    raise exception.with_traceback(traceback)
+distributed.scheduler.KilledWorker: Attempted to run task 'finalize-hlgfinalizecompute-e2f7fc3c933c418f865003a638fe0f5a' on 4 different workers, but all those workers died while running it. The last worker that attempt to run the task was tcp://127.0.0.1:35247. Inspecting worker logs is often a good next step to diagnose what went wrong. For more information see https://distributed.dask.org/en/stable/killed.html.
+/gpfs/work4/0/prjs1222/RAWS/RAWS/.pixi/envs/default/lib/python3.13/multiprocessing/resource_tracker.py:400: UserWarning: resource_tracker: There appear to be 9 leaked semaphore objects to clean up at shutdown: {'/mp-s6cupvgg', '/mp-hvwyzfit', '/mp-ottdgcpk', '/mp-londp477', '/mp-dt4kmrmc', '/mp-ug07fg32', '/mp-o9v6qsni', '/mp-b78n3ha1', '/mp-_xug5dsh'}
+  warnings.warn(

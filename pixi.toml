@@ -29,9 +29,11 @@ cdo = "*"
 pandas = "*"
 python-irodsclient = ">=3.1.1,<4"
 ruff = ">=0.16.0,<0.17"
+matplotlib-base = ">=3.10,<4"
 
 [pypi-dependencies]
 pysz = "*"
 pcodec = "*"
+xbitinfo = "*"
 # conda-forge's imagecodecs build omits SZ3 support; the PyPI wheel bundles it.
 imagecodecs = ">=2026.6.26,<2027"

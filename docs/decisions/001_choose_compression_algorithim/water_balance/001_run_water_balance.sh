@@ -1,8 +1,8 @@
 #!/bin/bash
-#SBATCH --partition=genoa
+#SBATCH --partition=fat_genoa
 #SBATCH --nodes=1
 #SBATCH --ntasks-per-node=1
-#SBATCH --cpus-per-task=16
+#SBATCH --cpus-per-task=192
 #SBATCH --time=72:00:00
 #SBATCH -J dw_water_balance
 #SBATCH -o /projects/prjs1222/RAWS/RAWS/docs/decisions/001_choose_compression_algorithim/water_balance/001_choose_compression_algorithim.out
@@ -57,16 +57,13 @@ download_hydrobasins() {
 # python "$script_dir/dw_data.py" "$output_dir/_temp"
 # python "$script_dir/merge_forcing.py" "$output_dir"
 
-taskset -c 0-191 python "$script_dir/compression_benchmark.py" \
-    --output-dir "$output_dir" \
-    --n-workers 48 \
-    --worker-memory-limit 7GB
-
-taskset -c 0-191 python "$script_dir/compare_benchmarks.py" \
-    --output-dir "$output_dir" \
-    --levels "3,6,8,12" \
-    --closure-tol-pp 0.1
-
-taskset -c 0-191 python $script_dir/plot_results.py \
+# taskset -c 0-191 python "$script_dir/informed_bitround.py" \
+#     --output-dir "$output_dir" \
+#     --n-workers 8 \
+#     --worker-memory-limit 170GB \
+#     --inflevel 0.9999
+# taskset -c 0-191 python "$script_dir/fidelity_diagnostics.py" \
+#     --output-dir "$output_dir"
+taskset -c 0-191 python "$script_dir/plot_fidelity.py" \
     --output-dir "$output_dir"
 
