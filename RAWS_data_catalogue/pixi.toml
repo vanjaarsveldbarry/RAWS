@@ -1,13 +1,4 @@
 # Environment for the catalogue and its test cases.
-#
-#   pixi install          once
-#   ./create_catalogue.sh
-#   ./create_testcase.sh
-#
-# Versions are pinned to the ones this data was processed with. pcraster and gdal
-# are what write and read the .map clone/landmask pair; netcdf4, zarr and xarray
-# are what the slab croppers cut netCDF and zarr stores with.
-
 [workspace]
 name = "RAWS_data_catalogue"
 authors = ["vanjaarsveldbarry <a.s.vanjaarsveld@uu.nl>"]

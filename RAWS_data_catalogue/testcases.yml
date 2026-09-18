@@ -1,25 +1,8 @@
-# Test case domains. One entry per catchment; the key is the test case name.
-# ./create_testcase.sh builds every entry here, so adding one is all it takes.
-#
-# A test case is a small model domain cut out of the catalogue: a clone map, a
-# landmask and -- once crop_to_testcase.py has run -- a cropped copy of every
-# dataset in the catalogue that covers it. Small enough to run on a laptop, real
-# enough to be worth trusting.
-#
-# The catchment is delineated from the LDDs already in the catalogue, once per
-# resolution that has one (`<resolution>/routing/ldd` in the catalogue manifest).
-# Which resolutions those are is not configured here -- catalogue an LDD and it
-# is built, drop one and it is not -- so a test case is always consistent with
-# the routing the model will actually use.
-#
+# Test case domains. 
 # Per test case:
-#   outlet   [lon, lat] of the basin mouth (required). Approximate is fine: it is
-#            snapped to the largest-accumulation cell within `snap`, so it need
-#            only land on the right river.
-#   snap     degrees to search around `outlet` for that cell (default 0.25)
+#   outlet   [lon, lat] of the basin mouth (required). Approximate is fine.
 #   search   [west, east, south, north] window the delineation runs in (default:
-#            outlet +/- 5 deg). Must contain the whole basin -- the generator
-#            fails loudly if the catchment touches its edge.
+#            outlet +/- 5 deg). Must contain the whole basin.
 
 
 # Tugela (Thukela), KwaZulu-Natal, South Africa: drains the Drakensberg

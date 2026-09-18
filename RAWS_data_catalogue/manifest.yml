@@ -26,7 +26,7 @@ forcing:
 
     CHELSA_doy_factor:
 
-      5arcminute:
+      5arcminutes:
 
         precip_downscaling_factor:
           src: /archive/depfg/7006713/_chapter1/data/pcrglob_5min_global/forcing/correctionFactors/tp_correction_factor
@@ -102,7 +102,7 @@ forcing:
         dst: precipitation_correl.nc
         ini_key: precipitCorrelNC
 
-30arcminute:
+30arcminutes:
 
   land_surface:
 
@@ -212,7 +212,7 @@ forcing:
       dst: non_irrigation_surface_water_fraction_max.nc
       ini_key: maximumNonIrrigationSurfaceWaterAbstractionFractionData
 
-5arcminute:
+5arcminutes:
 
   land_surface:
 

@@ -261,6 +261,7 @@ if __name__ == "__main__":
         snap = case.get("snap", 0.25)
         search = case.get("search", [lon - 5, lon + 5, lat - 5, lat + 5])
         print(name)
+        shutil.rmtree(TEST_CASES / name, ignore_errors=True)
         basins = {res: delineate(src, (lon, lat), snap, search) for res, src in ldds.items()}
         box = (math.floor(min(b.west for b in basins.values())),
                math.ceil(max(b.east for b in basins.values())),
