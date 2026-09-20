@@ -590,7 +590,7 @@ forcing:
   routing:
 
     ldd:
-      src: /scratch/depfg/sutan101/data/pcrglobwb_input_arise/develop/global_30sec/routing/surface_water_bodies/version_2020-05-XX/lddsound_30sec_version_202005XX_correct_lat.nc
+      src: /archive/depfg/7006713/_chapter1/data/pcrglob_30sec_global/other/lddsound_30sec_version_202005XX_correct_lat_mv255.nc
       dst: lddsound_30sec_version_202005XX_correct_lat.nc
       ini_key: lddMap
 
@@ -632,3 +632,239 @@ forcing:
       src: /scratch/depfg/sutan101/data/pcrglobwb_input_arise/develop/global_30sec/meteo/unique_ids/unique_ids_5_arcmin_correct_lats.nc
       dst: unique_ids_5_arcmin.nc
       ini_key: meteoDownscaleIds
+
+
+qualloc:
+
+  5arcminutes:
+
+    netcdf:
+
+      precipitation:
+        src: /scratch/depfg/carde003/barry/qualloc/netcdf/precipitation_monthTot_1980_2019_m_month_05arcmin.nc
+        dst: precipitation_monthTot_1980_2019_m_month_05arcmin.nc
+        ini_key: precipitation_ncfile
+
+      refpot_evaporation:
+        src: /scratch/depfg/carde003/barry/qualloc/netcdf/referencePotET_monthTot_1980_2019_m_month_05arcmin.nc
+        dst: referencePotET_monthTot_1980_2019_m_month_05arcmin.nc
+        ini_key: refpot_evaporation_ncfile
+
+      groundwater_recharge:
+        src: /scratch/depfg/carde003/barry/qualloc/netcdf/gwRecharge_monthTot_1980_2019_m_month_05arcmin.nc
+        dst: gwRecharge_monthTot_1980_2019_m_month_05arcmin.nc
+        ini_key: groundwater_recharge_ncfile
+
+      direct_runoff:
+        src: /scratch/depfg/carde003/barry/qualloc/netcdf/directRunoff_monthTot_1980_2019_m_month_05arcmin.nc
+        dst: directRunoff_monthTot_1980_2019_m_month_05arcmin.nc
+        ini_key: direct_runoff_ncfile
+
+      interflow:
+        src: /scratch/depfg/carde003/barry/qualloc/netcdf/interflowTotal_monthTot_1980_2019_m_month_05arcmin.nc
+        dst: interflowTotal_monthTot_1980_2019_m_month_05arcmin.nc
+        ini_key: interflow_ncfile
+
+      irrigation_water_demand:
+        src: /scratch/depfg/carde003/barry/qualloc/netcdf/irrigation_water_demand_1980_2019_m_day_05arcmin.nc
+        dst: irrigation_water_demand_1980_2019_m_day_05arcmin.nc
+        ini_key: irrigation_water_demand_ncfile
+
+      domestic_water_demand:
+        src: /scratch/depfg/carde003/barry/qualloc/netcdf/domestic_water_demand_1980_2019_m_day_05arcmin.nc
+        dst: domestic_water_demand_1980_2019_m_day_05arcmin.nc
+        ini_key: domestic_water_demand_ncfile
+
+      livestock_water_demand:
+        src: /scratch/depfg/carde003/barry/qualloc/netcdf/livestock_water_demand_1980_2019_m_day_05arcmin.nc
+        dst: livestock_water_demand_1980_2019_m_day_05arcmin.nc
+        ini_key: livestock_water_demand_ncfile
+
+      manufacture_water_demand:
+        src: /scratch/depfg/carde003/barry/qualloc/netcdf/manufacture_water_demand_1980_2019_m_day_05arcmin.nc
+        dst: manufacture_water_demand_1980_2019_m_day_05arcmin.nc
+        ini_key: manufacture_water_demand_ncfile
+
+      thermoelectric_water_demand:
+        src: /scratch/depfg/carde003/barry/qualloc/netcdf/thermoelectric_water_demand_1980_2019_m_day_05arcmin.nc
+        dst: thermoelectric_water_demand_1980_2019_m_day_05arcmin.nc
+        ini_key: thermoelectric_water_demand_ncfile
+
+      desalinated_water_use:
+        src: /scratch/depfg/carde003/barry/qualloc/netcdf/desalinated_water_use_1945_2021_m_day_05arcmin.nc
+        dst: desalinated_water_use_1945_2021_m_day_05arcmin.nc
+        ini_key: desalinated_water_use
+
+      regional_pumping_capacity:
+        src: /scratch/depfg/carde003/barry/qualloc/netcdf/regional_pumping_capacity_1980_2100.nc
+        dst: regional_pumping_capacity_1980_2100.nc
+        ini_key: groundwater_regional_pumping_capacity
+
+      surfacewater_temperature:
+        src: /scratch/depfg/carde003/barry/qualloc/netcdf/waterTemperature_monthlyAvg_1980_2019.nc
+        dst: waterTemperature_monthlyAvg_1980_2019.nc
+        ini_key: surfacewater_temperature_ncfile
+
+      surfacewater_organic:
+        src: /scratch/depfg/carde003/barry/qualloc/netcdf/organic_monthlyAvg_1980_2019.nc
+        dst: organic_monthlyAvg_1980_2019.nc
+        ini_key: surfacewater_organic_ncfile
+
+      surfacewater_salinity:
+        src: /scratch/depfg/carde003/barry/qualloc/netcdf/salinity_monthlyAvg_1980_2019.nc
+        dst: salinity_monthlyAvg_1980_2019.nc
+        ini_key: surfacewater_salinity_ncfile
+
+      surfacewater_pathogen:
+        src: /scratch/depfg/carde003/barry/qualloc/netcdf/pathogen_monthlyAvg_1980_2019.nc
+        dst: pathogen_monthlyAvg_1980_2019.nc
+        ini_key: surfacewater_pathogen_ncfile
+
+    initial:
+
+      total_base_flow:
+        src: /scratch/depfg/carde003/barry/qualloc/initial/total_base_flow_1999-12-31.nc
+        dst: total_base_flow_1999-12-31.nc
+        ini_key: total_base_flow_ini
+
+      groundwater_storage:
+        src: /scratch/depfg/carde003/barry/qualloc/initial/groundwater_storage_1999-12-31.nc
+        dst: groundwater_storage_1999-12-31.nc
+        ini_key: groundwater_storage_ini
+
+      surfacewater_storage:
+        src: /scratch/depfg/carde003/barry/qualloc/initial/surfacewater_storage_1999-12-31.nc
+        dst: surfacewater_storage_1999-12-31.nc
+        ini_key: surfacewater_storage_ini
+
+      groundwater_longterm_storage:
+        src: /scratch/depfg/carde003/barry/qualloc/initial/groundwater_longterm_storage_1999-12-31.nc
+        dst: groundwater_longterm_storage_1999-12-31.nc
+        ini_key: groundwater_longterm_storage_ini
+
+      surfacewater_longterm_discharge:
+        src: /scratch/depfg/carde003/barry/qualloc/initial/surfacewater_longterm_discharge_1999-12-31.nc
+        dst: surfacewater_longterm_discharge_1999-12-31.nc
+        ini_key: surfacewater_longterm_discharge_ini
+
+      surfacewater_longterm_runoff:
+        src: /scratch/depfg/carde003/barry/qualloc/initial/surfacewater_longterm_runoff_1999-12-31.nc
+        dst: surfacewater_longterm_runoff_1999-12-31.nc
+        ini_key: surfacewater_longterm_runoff_ini
+
+      gross_demand_longterm_domestic:
+        src: /scratch/depfg/carde003/barry/qualloc/initial/gross_demand_longterm_domestic_1999-12-31.nc
+        dst: gross_demand_longterm_domestic_1999-12-31.nc
+        ini_key: gross_demand_longterm_domestic_ini
+
+      gross_demand_longterm_irrigation:
+        src: /scratch/depfg/carde003/barry/qualloc/initial/gross_demand_longterm_irrigation_1999-12-31.nc
+        dst: gross_demand_longterm_irrigation_1999-12-31.nc
+        ini_key: gross_demand_longterm_irrigation_ini
+
+      gross_demand_longterm_livestock:
+        src: /scratch/depfg/carde003/barry/qualloc/initial/gross_demand_longterm_livestock_1999-12-31.nc
+        dst: gross_demand_longterm_livestock_1999-12-31.nc
+        ini_key: gross_demand_longterm_livestock_ini
+
+      gross_demand_longterm_manufacture:
+        src: /scratch/depfg/carde003/barry/qualloc/initial/gross_demand_longterm_manufacture_1999-12-31.nc
+        dst: gross_demand_longterm_manufacture_1999-12-31.nc
+        ini_key: gross_demand_longterm_manufacture_ini
+
+      gross_demand_longterm_thermoelectric:
+        src: /scratch/depfg/carde003/barry/qualloc/initial/gross_demand_longterm_thermoelectric_1999-12-31.nc
+        dst: gross_demand_longterm_thermoelectric_1999-12-31.nc
+        ini_key: gross_demand_longterm_thermoelectric_ini
+
+      total_return_flow:
+        src: /scratch/depfg/carde003/barry/qualloc/initial/total_return_flow_1999-12-31.nc
+        dst: total_return_flow_1999-12-31.nc
+        ini_key: total_return_flow_ini
+
+      groundwater_longterm_potential_withdrawal:
+        src: /scratch/depfg/carde003/barry/qualloc/initial/groundwater_longterm_potential_withdrawal_1999-12-31.nc
+        dst: groundwater_longterm_potential_withdrawal_1999-12-31.nc
+        ini_key: groundwater_longterm_potential_withdrawal_ini
+
+      surfacewater_longterm_temperature:
+        src: /scratch/depfg/carde003/barry/qualloc/initial/surfacewater_longterm_temperature_1999-12-31.nc
+        dst: surfacewater_longterm_temperature_1999-12-31.nc
+        ini_key: surfacewater_longterm_temperature_ini
+
+      surfacewater_longterm_organic:
+        src: /scratch/depfg/carde003/barry/qualloc/initial/surfacewater_longterm_organic_1999-12-31.nc
+        dst: surfacewater_longterm_organic_1999-12-31.nc
+        ini_key: surfacewater_longterm_organic_ini
+
+      surfacewater_longterm_salinity:
+        src: /scratch/depfg/carde003/barry/qualloc/initial/surfacewater_longterm_salinity_1999-12-31.nc
+        dst: surfacewater_longterm_salinity_1999-12-31.nc
+        ini_key: surfacewater_longterm_salinity_ini
+
+      surfacewater_longterm_pathogen:
+        src: /scratch/depfg/carde003/barry/qualloc/initial/surfacewater_longterm_pathogen_1999-12-31.nc
+        dst: surfacewater_longterm_pathogen_1999-12-31.nc
+        ini_key: surfacewater_longterm_pathogen_ini
+
+    maps:
+
+      cellarea:
+        src: /scratch/depfg/sutan101/data/pcrglobwb_input_arise/develop/global_05min/routing/cell_area/cdo_gridarea_clone_global_05min_correct_lats.nc
+        dst: cell_area_05min.nc
+        ini_key: cellarea
+
+      groundwater_alpha:
+        src: /scratch/depfg/carde003/barry/qualloc/maps/groundwater_alpha.map
+        dst: groundwater_alpha.map
+        ini_key: alpha
+
+      ldd:
+        src: /scratch/depfg/sutan101/data/pcrglobwb_input_arise/develop/global_05min/routing/surface_water_bodies/version_20210330/lddsound_05min_version_20210330.map
+        dst: lddsound_05min_version_20210330.map
+        ini_key: ldd
+
+      fraction_water:
+        src: /scratch/depfg/carde003/barry/qualloc/maps/fraction_water.map
+        dst: fraction_water.map
+        ini_key: fraction_water
+
+      water_cropfactor:
+        src: /scratch/depfg/carde003/barry/qualloc/maps/water_cropfactor.map
+        dst: water_cropfactor.map
+        ini_key: water_cropfactor
+
+      channel_gradient:
+        src: /scratch/depfg/sutan101/data/pcrglobwb_input_arise/develop/global_05min/routing/channel_properties/version_20210401_from_03sec_merit_dem/maps_covered_with_zero/gradient_channel_parameters_5min_april_2021_global_covered_with_zero.nc
+        dst: gradient.nc
+        ini_key: channel_gradient
+
+      channel_width:
+        src: /scratch/depfg/sutan101/data/pcrglobwb_input_arise/develop/global_05min/routing/channel_properties/version_20210401_from_03sec_merit_dem/maps_covered_with_zero/bankfull_width_channel_parameters_5min_april_2021_global_covered_with_zero.nc
+        dst: bankfull_width.nc
+        ini_key: channel_width
+
+      channel_depth:
+        src: /scratch/depfg/sutan101/data/pcrglobwb_input_arise/develop/global_05min/routing/channel_properties/version_20210401_from_03sec_merit_dem/maps_covered_with_zero/bankfull_depth_channel_parameters_5min_april_2021_global_covered_with_zero.nc
+        dst: bankfull_depth.nc
+        ini_key: channel_depth
+
+      channel_length:
+        src: /scratch/depfg/carde003/barry/qualloc/maps/channel_length.map
+        dst: channel_length.map
+        ini_key: channel_length
+
+      allocation_zones:
+        src: /scratch/depfg/sutan101/data/pcrglobwb_input_arise/develop/global_05min_from_gmd_paper_input/waterUse/abstraction_zones/abstraction_zones_60min_05min.nc
+        dst: abstraction_zones_60min_05min.nc
+        ini_key: desalwater_allocation_zones, surfacewater_allocation_zones, groundwater_allocation_zones
+
+      withdrawal_points:
+        src: /scratch/depfg/carde003/barry/qualloc/maps/abstraction_by_cells.map
+        dst: abstraction_by_cells.map
+        ini_key: desalwater_withdrawal_points, surfacewater_withdrawal_points, groundwater_withdrawal_points
+
+      limit_temperature:
+        src: /scratch/depfg/carde003/barry/qualloc/maps/limit_temperature_thermoelectric_DynQual_95th.map
+        dst: limit_temperature_thermoelectric_DynQual_95th.map
+        ini_key: limit_temperature_manufacture, limit_temperature_thermoelectric

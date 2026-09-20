@@ -50,9 +50,9 @@ def main():
         out[name] = {**entry, "dst": rel, "kind": "dir" if src.is_dir() else "file",
                      "src_size": size, "built": today}
 
-    # entries dropped from manifest.yml must not linger in the tree or the record
-    for name in sorted(set(previous) - set(out)):
-        stale = ROOT / previous[name]["dst"]
+    # entries dropped from manifest.yml, or given a new dst, must not linger in the tree
+    for rel in sorted({e["dst"] for e in previous.values()} - {e["dst"] for e in out.values()}):
+        stale = ROOT / rel
         if stale.is_symlink():
             stale.unlink()                  # the link, never the data
         folder = stale.parent

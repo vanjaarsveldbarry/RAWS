@@ -12,6 +12,7 @@ import yaml
 import zarr
 from netCDF4 import Dataset
 from osgeo import gdal
+from tqdm import tqdm
 
 gdal.UseExceptions()
 
@@ -23,7 +24,7 @@ PCRMAP_EXTS = (".map", ".ldd")
 X_NAMES = ("lon", "longitude")
 Y_NAMES = ("lat", "latitude")
 EARTH_RADIUS = 6371007.181
-WORKERS = 8
+WORKERS = 16
 READ_BYTES = 256 << 20
 REL_TOL = 1e-3
 TOL = 1e-9
@@ -247,7 +248,7 @@ def crop_case(name, manifest, box, cells):
                 continue
         work += [(path, TEST_CASES / name / rel / path.relative_to(src), box, cell) for path in files_in(src)]
     with concurrent.futures.ProcessPoolExecutor(WORKERS) as ex:
-        list(ex.map(crop_one, *zip(*work)))
+        list(tqdm(ex.map(crop_one, *zip(*work)), total=len(work), desc=name))
 
 
 if __name__ == "__main__":
