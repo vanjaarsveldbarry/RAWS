@@ -22,6 +22,33 @@ forcing:
       dst: refPotEvap_1979-2019.nc
       ini_key: refETPotFileNC
 
+    shortwave_radiation:
+      src: /scratch/depfg/carde003/barry/pcrglobwb/forcing/historical/W5E5/rsds_W5E5v2.0_19790101-20191231_with_climatology_on_1978_wm-2.nc
+      dst: rsds_W5E5v2.0_19790101-20191231_with_climatology_on_1978_wm-2.nc
+      ini_key: radiationNC
+
+    annual_average_temperature:
+      src: /scratch/depfg/carde003/barry/pcrglobwb/forcing/historical/W5E5/tas_W5E5v2.0_19790101-20191231_annAvg_C.nc
+      dst: tas_W5E5v2.0_19790101-20191231_annAvg_C.nc
+      ini_key: annualAvgTNC
+
+  cru:
+
+    vapour_pressure:
+      src: /scratch/depfg/carde003/barry/pcrglobwb/forcing/historical/W5E5/vap_cru_ts3.21.nc
+      dst: vap_cru_ts3.21.nc
+      ini_key: vaporNC
+
+    cloud_cover:
+      src: /scratch/depfg/carde003/barry/pcrglobwb/forcing/historical/W5E5/cloudCover_cru_ts3.21.nc
+      dst: cloudCover_cru_ts3.21.nc
+      ini_key: cloudcoverNC
+
+  sunhoursfrac:
+    src: /scratch/depfg/carde003/barry/pcrglobwb/forcing/historical/sunhoursfrac.tbl
+    dst: sunhoursfrac.tbl
+    ini_key: sunhoursTable
+
   downscaling:
 
     CHELSA_doy_factor:
@@ -329,6 +356,11 @@ forcing:
         dst: specific_yield_aquifer_05min.map
         ini_key: specificYield
 
+      groundwater_alpha:
+        src: /scratch/depfg/carde003/barry/qualloc/maps/groundwater_alpha.map
+        dst: groundwater_alpha.map
+        ini_key: alpha
+
     aquifer_thickness:
 
       estimate:
@@ -352,6 +384,21 @@ forcing:
       src: /scratch/depfg/sutan101/data/pcrglobwb_input_arise/develop/global_05min/routing/cell_area/cdo_gridarea_clone_global_05min_correct_lats.nc
       dst: cell_area_05min.nc
       ini_key: cellAreaMap
+    
+    fraction_water:
+      src: /scratch/depfg/carde003/barry/qualloc/maps/fraction_water.map
+      dst: fraction_water.map
+      ini_key: fraction_water
+
+    water_cropfactor:
+      src: /scratch/depfg/carde003/barry/qualloc/maps/water_cropfactor.map
+      dst: water_cropfactor.map
+      ini_key: water_cropfactor
+    
+    limit_temperature:
+      src: /scratch/depfg/carde003/barry/qualloc/maps/limit_temperature_thermoelectric_DynQual_95th.map
+      dst: limit_temperature_thermoelectric_DynQual_95th.map
+      ini_key: limit_temperature_manufacture, limit_temperature_thermoelectric
 
     channel:
 
@@ -369,6 +416,97 @@ forcing:
         src: /scratch/depfg/sutan101/data/pcrglobwb_input_arise/develop/global_05min/routing/channel_properties/version_20210401_from_03sec_merit_dem/maps_covered_with_zero/bankfull_width_channel_parameters_5min_april_2021_global_covered_with_zero.nc
         dst: bankfull_width.nc
         ini_key: constantChannelWidth, minimumChannelWidth
+
+      channel_length:
+        src: /scratch/depfg/carde003/barry/qualloc/maps/channel_length.map
+        dst: channel_length.map
+        ini_key: channel_length
+
+    powerplants:
+
+      powerplants_freshwater:
+        src: /scratch/depfg/carde003/barry/pcrglobwb/waterUse/powerplants_freshwater_1960-2019.nc
+        dst: powerplants_freshwater_1960-2019.nc
+        ini_key: powerplants_fwNC
+
+      powerplants_freshwater_fixed:
+        src: /scratch/depfg/carde003/barry/pcrglobwb/waterUse/powerplants_freshwater_fixed_1960-2019.nc
+        dst: powerplants_freshwater_fixed_1960-2019.nc
+        ini_key: powerplants_fwfixedNC
+
+      powerplants_seawater:
+        src: /scratch/depfg/carde003/barry/pcrglobwb/waterUse/powerplants_seawater_1960-2019.nc
+        dst: powerplants_seawater_1960-2019.nc
+        ini_key: powerplants_swNC
+
+      river_temperature_limit:
+        src: /scratch/depfg/carde003/barry/pcrglobwb/waterUse/DynQual_triver_95th_perc.nc
+        dst: DynQual_triver_95th_perc.nc
+        ini_key: TlmaxNC
+
+    calc_loadings:
+
+      population:
+        src: /scratch/depfg/carde003/barry/pcrglobwb/calc_loadings/population_1980-2019_05min.nc
+        dst: population_1980-2019_05min.nc
+        ini_key: PopulationNC
+
+      industrial_manufacturing_factor:
+        src: /scratch/depfg/carde003/barry/pcrglobwb/calc_loadings/factorInd_Man.nc
+        dst: factorInd_Man.nc
+        ini_key: factorInd_ManNC
+
+      urban_fraction:
+        src: /scratch/depfg/carde003/barry/pcrglobwb/calc_loadings/urban_fraction_1970-2010_05min.nc
+        dst: urban_fraction_1970-2010_05min.nc
+        ini_key: UrbanFractionNC
+
+      livestock_population:
+        src: /scratch/depfg/carde003/barry/pcrglobwb/calc_loadings/livestock_population_1980-2019_05min.nc
+        dst: livestock_population_1980-2019_05min.nc
+        ini_key: LivPopulationNC
+
+      domestic_excretion_load:
+        src: /scratch/depfg/carde003/barry/pcrglobwb/calc_loadings/Dom_ExcLoad.nc
+        dst: Dom_ExcLoad.nc
+        ini_key: Dom_ExcrLoadNC
+
+      manufacturing_effluent_concentration:
+        src: /scratch/depfg/carde003/barry/pcrglobwb/calc_loadings/Man_EffConc.nc
+        dst: Man_EffConc.nc
+        ini_key: Man_EfflConcNC
+
+      urban_surface_runoff_effluent_concentration:
+        src: /scratch/depfg/carde003/barry/pcrglobwb/calc_loadings/USR_EffConc.nc
+        dst: USR_EffConc.nc
+        ini_key: USR_EfflConcNC
+
+      livestock_excretion_load:
+        src: /scratch/depfg/carde003/barry/pcrglobwb/calc_loadings/Liv_ExcLoad.nc
+        dst: Liv_ExcLoad.nc
+        ini_key: Liv_ExcrLoadNC
+
+      irrigation_effluent_concentration:
+        src: /scratch/depfg/carde003/barry/pcrglobwb/calc_loadings/Irr_EffConc.nc
+        dst: Irr_EffConc.nc
+        ini_key: Irr_EfflConcNC
+
+      wastewater_treatment_plants:
+        src: /scratch/depfg/carde003/barry/pcrglobwb/calc_loadings/WWt_plants.nc
+        dst: WWt_plants.nc
+        ini_key: WWtPlantsNC
+
+    loadings:
+
+      background_salinity:
+        src: /scratch/depfg/carde003/barry/pcrglobwb/loadings/Background_TDS_05min.nc
+        dst: Background_TDS_05min.nc
+        ini_key: backgroundSalinity
+
+      total_suspended_solids:
+        src: /scratch/depfg/carde003/barry/pcrglobwb/loadings/TSS_2000.map
+        dst: TSS_2000.map
+        ini_key: TSSmap
 
   water_use:
 
@@ -388,6 +526,11 @@ forcing:
         src: /scratch/depfg/sutan101/data/pcrglobwb_input_arise/develop/global_05min_from_gmd_paper_input/waterUse/waterDemand/livestock/livestock_water_demand_version_april_2015.nc
         dst: livestock.nc
         ini_key: livestockWaterDemandFile
+
+      manufacturing_water_demand:
+        src: /scratch/depfg/carde003/barry/pcrglobwb/waterUse/manufacturing_water_demand_historical_1960-2019.nc
+        dst: manufacturing_water_demand_historical_1960-2019.nc
+        ini_key: manufactureWaterDemandFile
 
     irrigation:
 
@@ -418,10 +561,16 @@ forcing:
         dst: abstraction_zones_60min_05min.nc
         ini_key: allocationSegmentsForGroundSurfaceWater
 
+      withdrawal_points:
+        src: /scratch/depfg/carde003/barry/qualloc/maps/abstraction_by_cells.map
+        dst: abstraction_by_cells.map
+        ini_key: desalwater_withdrawal_points, surfacewater_withdrawal_points, groundwater_withdrawal_points  
+
     desalination:
       src: /scratch/depfg/sutan101/data/pcrglobwb_input_arise/develop/global_05min_from_gmd_paper_input/waterUse/desalination/desalination_water_version_april_2015.nc
       dst: desalination.nc
       ini_key: desalinationWater
+ 
 
 30arcseconds:
 
@@ -719,152 +868,3 @@ qualloc:
         src: /scratch/depfg/carde003/barry/qualloc/netcdf/pathogen_monthlyAvg_1980_2019.nc
         dst: pathogen_monthlyAvg_1980_2019.nc
         ini_key: surfacewater_pathogen_ncfile
-
-    initial:
-
-      total_base_flow:
-        src: /scratch/depfg/carde003/barry/qualloc/initial/total_base_flow_1999-12-31.nc
-        dst: total_base_flow_1999-12-31.nc
-        ini_key: total_base_flow_ini
-
-      groundwater_storage:
-        src: /scratch/depfg/carde003/barry/qualloc/initial/groundwater_storage_1999-12-31.nc
-        dst: groundwater_storage_1999-12-31.nc
-        ini_key: groundwater_storage_ini
-
-      surfacewater_storage:
-        src: /scratch/depfg/carde003/barry/qualloc/initial/surfacewater_storage_1999-12-31.nc
-        dst: surfacewater_storage_1999-12-31.nc
-        ini_key: surfacewater_storage_ini
-
-      groundwater_longterm_storage:
-        src: /scratch/depfg/carde003/barry/qualloc/initial/groundwater_longterm_storage_1999-12-31.nc
-        dst: groundwater_longterm_storage_1999-12-31.nc
-        ini_key: groundwater_longterm_storage_ini
-
-      surfacewater_longterm_discharge:
-        src: /scratch/depfg/carde003/barry/qualloc/initial/surfacewater_longterm_discharge_1999-12-31.nc
-        dst: surfacewater_longterm_discharge_1999-12-31.nc
-        ini_key: surfacewater_longterm_discharge_ini
-
-      surfacewater_longterm_runoff:
-        src: /scratch/depfg/carde003/barry/qualloc/initial/surfacewater_longterm_runoff_1999-12-31.nc
-        dst: surfacewater_longterm_runoff_1999-12-31.nc
-        ini_key: surfacewater_longterm_runoff_ini
-
-      gross_demand_longterm_domestic:
-        src: /scratch/depfg/carde003/barry/qualloc/initial/gross_demand_longterm_domestic_1999-12-31.nc
-        dst: gross_demand_longterm_domestic_1999-12-31.nc
-        ini_key: gross_demand_longterm_domestic_ini
-
-      gross_demand_longterm_irrigation:
-        src: /scratch/depfg/carde003/barry/qualloc/initial/gross_demand_longterm_irrigation_1999-12-31.nc
-        dst: gross_demand_longterm_irrigation_1999-12-31.nc
-        ini_key: gross_demand_longterm_irrigation_ini
-
-      gross_demand_longterm_livestock:
-        src: /scratch/depfg/carde003/barry/qualloc/initial/gross_demand_longterm_livestock_1999-12-31.nc
-        dst: gross_demand_longterm_livestock_1999-12-31.nc
-        ini_key: gross_demand_longterm_livestock_ini
-
-      gross_demand_longterm_manufacture:
-        src: /scratch/depfg/carde003/barry/qualloc/initial/gross_demand_longterm_manufacture_1999-12-31.nc
-        dst: gross_demand_longterm_manufacture_1999-12-31.nc
-        ini_key: gross_demand_longterm_manufacture_ini
-
-      gross_demand_longterm_thermoelectric:
-        src: /scratch/depfg/carde003/barry/qualloc/initial/gross_demand_longterm_thermoelectric_1999-12-31.nc
-        dst: gross_demand_longterm_thermoelectric_1999-12-31.nc
-        ini_key: gross_demand_longterm_thermoelectric_ini
-
-      total_return_flow:
-        src: /scratch/depfg/carde003/barry/qualloc/initial/total_return_flow_1999-12-31.nc
-        dst: total_return_flow_1999-12-31.nc
-        ini_key: total_return_flow_ini
-
-      groundwater_longterm_potential_withdrawal:
-        src: /scratch/depfg/carde003/barry/qualloc/initial/groundwater_longterm_potential_withdrawal_1999-12-31.nc
-        dst: groundwater_longterm_potential_withdrawal_1999-12-31.nc
-        ini_key: groundwater_longterm_potential_withdrawal_ini
-
-      surfacewater_longterm_temperature:
-        src: /scratch/depfg/carde003/barry/qualloc/initial/surfacewater_longterm_temperature_1999-12-31.nc
-        dst: surfacewater_longterm_temperature_1999-12-31.nc
-        ini_key: surfacewater_longterm_temperature_ini
-
-      surfacewater_longterm_organic:
-        src: /scratch/depfg/carde003/barry/qualloc/initial/surfacewater_longterm_organic_1999-12-31.nc
-        dst: surfacewater_longterm_organic_1999-12-31.nc
-        ini_key: surfacewater_longterm_organic_ini
-
-      surfacewater_longterm_salinity:
-        src: /scratch/depfg/carde003/barry/qualloc/initial/surfacewater_longterm_salinity_1999-12-31.nc
-        dst: surfacewater_longterm_salinity_1999-12-31.nc
-        ini_key: surfacewater_longterm_salinity_ini
-
-      surfacewater_longterm_pathogen:
-        src: /scratch/depfg/carde003/barry/qualloc/initial/surfacewater_longterm_pathogen_1999-12-31.nc
-        dst: surfacewater_longterm_pathogen_1999-12-31.nc
-        ini_key: surfacewater_longterm_pathogen_ini
-
-    maps:
-
-      cellarea:
-        src: /scratch/depfg/sutan101/data/pcrglobwb_input_arise/develop/global_05min/routing/cell_area/cdo_gridarea_clone_global_05min_correct_lats.nc
-        dst: cell_area_05min.nc
-        ini_key: cellarea
-
-      groundwater_alpha:
-        src: /scratch/depfg/carde003/barry/qualloc/maps/groundwater_alpha.map
-        dst: groundwater_alpha.map
-        ini_key: alpha
-
-      ldd:
-        src: /scratch/depfg/sutan101/data/pcrglobwb_input_arise/develop/global_05min/routing/surface_water_bodies/version_20210330/lddsound_05min_version_20210330.map
-        dst: lddsound_05min_version_20210330.map
-        ini_key: ldd
-
-      fraction_water:
-        src: /scratch/depfg/carde003/barry/qualloc/maps/fraction_water.map
-        dst: fraction_water.map
-        ini_key: fraction_water
-
-      water_cropfactor:
-        src: /scratch/depfg/carde003/barry/qualloc/maps/water_cropfactor.map
-        dst: water_cropfactor.map
-        ini_key: water_cropfactor
-
-      channel_gradient:
-        src: /scratch/depfg/sutan101/data/pcrglobwb_input_arise/develop/global_05min/routing/channel_properties/version_20210401_from_03sec_merit_dem/maps_covered_with_zero/gradient_channel_parameters_5min_april_2021_global_covered_with_zero.nc
-        dst: gradient.nc
-        ini_key: channel_gradient
-
-      channel_width:
-        src: /scratch/depfg/sutan101/data/pcrglobwb_input_arise/develop/global_05min/routing/channel_properties/version_20210401_from_03sec_merit_dem/maps_covered_with_zero/bankfull_width_channel_parameters_5min_april_2021_global_covered_with_zero.nc
-        dst: bankfull_width.nc
-        ini_key: channel_width
-
-      channel_depth:
-        src: /scratch/depfg/sutan101/data/pcrglobwb_input_arise/develop/global_05min/routing/channel_properties/version_20210401_from_03sec_merit_dem/maps_covered_with_zero/bankfull_depth_channel_parameters_5min_april_2021_global_covered_with_zero.nc
-        dst: bankfull_depth.nc
-        ini_key: channel_depth
-
-      channel_length:
-        src: /scratch/depfg/carde003/barry/qualloc/maps/channel_length.map
-        dst: channel_length.map
-        ini_key: channel_length
-
-      allocation_zones:
-        src: /scratch/depfg/sutan101/data/pcrglobwb_input_arise/develop/global_05min_from_gmd_paper_input/waterUse/abstraction_zones/abstraction_zones_60min_05min.nc
-        dst: abstraction_zones_60min_05min.nc
-        ini_key: desalwater_allocation_zones, surfacewater_allocation_zones, groundwater_allocation_zones
-
-      withdrawal_points:
-        src: /scratch/depfg/carde003/barry/qualloc/maps/abstraction_by_cells.map
-        dst: abstraction_by_cells.map
-        ini_key: desalwater_withdrawal_points, surfacewater_withdrawal_points, groundwater_withdrawal_points
-
-      limit_temperature:
-        src: /scratch/depfg/carde003/barry/qualloc/maps/limit_temperature_thermoelectric_DynQual_95th.map
-        dst: limit_temperature_thermoelectric_DynQual_95th.map
-        ini_key: limit_temperature_manufacture, limit_temperature_thermoelectric

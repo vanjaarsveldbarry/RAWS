@@ -1,7 +1,10 @@
 import concurrent.futures
+import ctypes
+import itertools
 import math
 import pathlib
 import shutil
+import struct
 import subprocess
 from typing import NamedTuple
 
@@ -10,11 +13,15 @@ import pcraster as pcr
 import xarray as xr
 import yaml
 import zarr
-from netCDF4 import Dataset
+from netCDF4 import Dataset, set_chunk_cache
 from osgeo import gdal
 from tqdm import tqdm
 
 gdal.UseExceptions()
+# Most sources hold one uncompressed global slice per chunk. With a chunk cache HDF5 reads each
+# whole chunk to serve a window; without one it reads only the window's bytes.
+set_chunk_cache(0, 0, 0)
+BLOSC = ctypes.CDLL("libblosc.so.1")
 
 CATALOGUE = pathlib.Path("CATALOGUE")
 GLOBAL_INPUTS = CATALOGUE / "GLOBAL_INPUTS"
@@ -24,7 +31,7 @@ PCRMAP_EXTS = (".map", ".ldd")
 X_NAMES = ("lon", "longitude")
 Y_NAMES = ("lat", "latitude")
 EARTH_RADIUS = 6371007.181
-WORKERS = 16
+WORKERS = 32
 READ_BYTES = 256 << 20
 REL_TOL = 1e-3
 TOL = 1e-9
@@ -196,8 +203,46 @@ def crop_zarr(src_path, dst_path, tx, ty, cell):
         raise ValueError(f"{src_path} is not on the clone grid")
     nx, ny = len(xvals), len(yvals)
 
+    # zarr reads and decompresses whole chunks, ~100 MB each at 30 arcsec for a window of under
+    # 1 MB, and the NFS link is the bottleneck. blosc_getitem needs only the header, the block
+    # offsets and the blocks under the window, so only those bytes are read into `comp`.
+    def read_chunk(path, sel):
+        first = int(np.ravel_multi_index([s.start for s in sel], var.chunks))
+        n = int(np.ravel_multi_index([s.stop - 1 for s in sel], var.chunks)) - first + 1
+        size = var.dtype.itemsize
+        with open(path, "rb") as f:
+            head = f.read(16)
+            flags, nbytes, blocksize, cbytes = struct.unpack("<2xBx3I", head)
+            if flags & 2:  # stored uncompressed, no block offsets
+                lo, hi = 16 + first * size, 16 + (first + n) * size
+            else:
+                head += f.read(4 * -(-nbytes // blocksize))
+                starts = np.frombuffer(head, "<u4", offset=16).astype("i8")
+                order = np.sort(starts)
+                ends = np.append(order, cbytes)[np.searchsorted(order, starts) + 1]
+                blocks = slice(first * size // blocksize, ((first + n) * size - 1) // blocksize + 1)
+                lo, hi = starts[blocks].min(), ends[blocks].max()
+            comp = np.empty(cbytes, "u1")
+            comp[:len(head)] = np.frombuffer(head, "u1")
+            f.seek(lo)
+            f.readinto(comp[lo:hi])
+        full = np.empty(var.chunks, var.dtype)
+        if BLOSC.blosc_getitem(ctypes.c_void_p(comp.ctypes.data), first, n,
+                               ctypes.c_void_p(full.reshape(-1)[first:].ctypes.data)) != n * size:
+            raise ValueError(f"{path}: blosc_getitem failed")
+        return full[tuple(sel)]
+
     def read_step(t):
-        return var[tuple({"time": t, "lon": xs, "lat": ys}[d] for d in dims)]
+        want = [{"time": slice(t, t + 1), "lon": xs, "lat": ys}[d] for d in dims]
+        out = np.empty([s.stop - s.start for s in want], var.dtype)
+        for idx in itertools.product(*(range(s.start // c, (s.stop - 1) // c + 1)
+                                       for s, c in zip(want, var.chunks))):
+            part = [slice(max(s.start, i * c), min(s.stop, (i + 1) * c))
+                    for s, i, c in zip(want, idx, var.chunks)]
+            out[tuple(slice(p.start - s.start, p.stop - s.start) for p, s in zip(part, want))] = read_chunk(
+                src_path / name / ".".join(map(str, idx)),
+                [slice(p.start - i * c, p.stop - i * c) for p, i, c in zip(part, idx, var.chunks)])
+        return out.squeeze(dims.index("time"))
 
     attrs = {k: v for k, v in var.attrs.items() if k != "_ARRAY_DIMENSIONS"}
     tattrs = {k: v for k, v in src["time"].attrs.items() if k != "_ARRAY_DIMENSIONS"}
@@ -239,7 +284,7 @@ def crop_case(name, manifest, box, cells):
         rel = pathlib.Path(entry["dst"])
         src = GLOBAL_INPUTS / rel
         native = native_cell(src)
-        if native < finest * (1 - REL_TOL):
+        if native is not None and native < finest * (1 - REL_TOL):
             continue
         cell = finest
         if is_zarr(src):
