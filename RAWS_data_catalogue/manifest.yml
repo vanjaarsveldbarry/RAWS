@@ -24,12 +24,12 @@ forcing:
 
     shortwave_radiation:
       src: /scratch/depfg/carde003/barry/pcrglobwb/forcing/historical/W5E5/rsds_W5E5v2.0_19790101-20191231_with_climatology_on_1978_wm-2.nc
-      dst: rsds_W5E5v2.0_19790101-20191231_with_climatology_on_1978_wm-2.nc
+      dst: rsds_1979-2019_wm-2.nc
       ini_key: radiationNC
 
     annual_average_temperature:
       src: /scratch/depfg/carde003/barry/pcrglobwb/forcing/historical/W5E5/tas_W5E5v2.0_19790101-20191231_annAvg_C.nc
-      dst: tas_W5E5v2.0_19790101-20191231_annAvg_C.nc
+      dst: tas_1979-2019_annAvg_C.nc
       ini_key: annualAvgTNC
 
   cru:
@@ -101,12 +101,17 @@ forcing:
 
       dem:
         src: /scratch/depfg/sutan101/data/pcrglobwb_input_arise/develop/global_05min_from_gmd_paper_input/meteo/downscaling_from_30min/gtopo05min.nc
-        dst: gtopo05min.nc
+        dst: gtopo.nc
         ini_key: highResolutionDEM
 
-      cell_ids:
+      cell_ids_30min:
         src: /scratch/depfg/sutan101/data/pcrglobwb_input_arise/develop/global_05min_from_gmd_paper_input/meteo/downscaling_from_30min/uniqueIds_30min.nc
-        dst: uniqueIds_30min.nc
+        dst: unique_ids_30min.nc
+        ini_key: meteoDownscaleIds
+
+      cell_ids_05min:
+        src: /scratch/depfg/sutan101/data/pcrglobwb_input_arise/develop/global_30sec/meteo/unique_ids/unique_ids_5_arcmin_correct_lats.nc
+        dst: unique_ids_05min.nc
         ini_key: meteoDownscaleIds
 
       temperature_lapse_rate:
@@ -137,14 +142,14 @@ forcing:
 
       parameters:
         src: /scratch/depfg/sutan101/data/pcrglobwb_input_arise/develop/global_30min_from_gmd_paper_input/landSurface/topography/topography_parameters_30_arcmin_october_2015.nc
-        dst: topography_parameters_30min.nc
+        dst: topography_parameters.nc
         ini_key: topographyNC
 
     soil:
 
       properties:
         src: /scratch/depfg/sutan101/data/pcrglobwb_input_arise/develop/global_30min_from_gmd_paper_input/landSurface/soil/soilProperties.nc
-        dst: soilProperties30ArcMin.nc
+        dst: soilProperties.nc
         ini_key: soilPropertiesNC
 
     land_cover:
@@ -290,24 +295,24 @@ forcing:
 
       estimate:
         src: /scratch/depfg/sutan101/data/pcrglobwb_input_arise/develop/global_30min_from_gmd_paper_input/groundwater/aquifer_thickness_estimate/thickness_30min.nc
-        dst: aquifer_thickness_30min.nc
+        dst: aquifer_thickness.nc
         ini_key: estimateOfTotalGroundwaterThickness
 
   routing:
 
     ldd:
       src: /scratch/depfg/sutan101/data/pcrglobwb_input_arise/develop/global_30min_from_gmd_paper_input/routing/ldd_and_cell_area/lddsound_30min.map
-      dst: lddsound_30min.map
+      dst: lddsound.map
       ini_key: lddMap
 
     water_bodies:
       src: /scratch/depfg/sutan101/data/pcrglobwb_input_arise/develop/global_30min_from_gmd_paper_input/routing/surface_water_bodies/waterBodies30min.nc
-      dst: waterBodies30min.nc
+      dst: waterBodies.nc
       ini_key: waterBodyInputNC
 
     cell_area:
       src: /scratch/depfg/sutan101/data/pcrglobwb_input_arise/develop/global_30min_from_gmd_paper_input/routing/ldd_and_cell_area/cellarea30min.nc
-      dst: cell_area_30min.nc
+      dst: cell_area.nc
       ini_key: cellAreaMap
 
     kc_open_water:
@@ -427,7 +432,7 @@ forcing:
 
       area_historical:
         src: /scratch/depfg/sutan101/data/pcrglobwb_input_arise/develop/global_30min_from_gmd_paper_input/waterUse/irrigation/irrigated_areas/irrigationArea30ArcMin.nc
-        dst: irrigation_area_30min.nc
+        dst: irrigation_area.nc
         ini_key: historicalIrrigationArea
 
       surface_water_fraction:
@@ -444,12 +449,12 @@ forcing:
 
       groundwater_30min:
         src: /scratch/depfg/sutan101/data/pcrglobwb_input_arise/develop/global_30min_from_gmd_paper_input/waterUse/abstraction_zones/abstraction_zones_30min_30min.nc
-        dst: abstraction_zones_30min_30min.nc
+        dst: abstraction_zones_30min.nc
         ini_key: allocationSegmentsForGroundwater
 
       ground_surface_water_60min:
         src: /scratch/depfg/sutan101/data/pcrglobwb_input_arise/develop/global_30min_from_gmd_paper_input/waterUse/abstraction_zones/abstraction_zones_60min_30min.nc
-        dst: abstraction_zones_60min_30min.nc
+        dst: abstraction_zones_60min.nc
         ini_key: allocationSegmentsForGroundSurfaceWater
 
     pumping_capacity:
@@ -474,15 +479,117 @@ forcing:
     topography:
 
       merit_2021:
-        src: /scratch/depfg/sutan101/data/pcrglobwb_input_arise/develop/global_05min/landSurface/topography/version_202104XX_from_merit_dem/maps_covered_with_zero
-        dst: merit_2021
-        ini_key: topographyNC, relativeElevationFiles
+
+        dem_average:
+          src: /scratch/depfg/sutan101/data/pcrglobwb_input_arise/develop/global_05min/landSurface/topography/version_202104XX_from_merit_dem/maps_covered_with_zero/dem_average_topography_parameters_5min_april_2021_global_covered_with_zero.nc
+          dst: dem_average.nc
+          ini_key: topographyNC
+
+        dem_maximum:
+          src: /scratch/depfg/sutan101/data/pcrglobwb_input_arise/develop/global_05min/landSurface/topography/version_202104XX_from_merit_dem/maps_covered_with_zero/dem_maximum_topography_parameters_5min_april_2021_global_covered_with_zero.nc
+          dst: dem_maximum.nc
+          ini_key: topographyNC
+
+        dem_minimum:
+          src: /scratch/depfg/sutan101/data/pcrglobwb_input_arise/develop/global_05min/landSurface/topography/version_202104XX_from_merit_dem/maps_covered_with_zero/dem_minimum_topography_parameters_5min_april_2021_global_covered_with_zero.nc
+          dst: dem_minimum.nc
+          ini_key: topographyNC
+
+        dem_standard_deviation:
+          src: /scratch/depfg/sutan101/data/pcrglobwb_input_arise/develop/global_05min/landSurface/topography/version_202104XX_from_merit_dem/maps_covered_with_zero/dem_standard_deviation_topography_parameters_5min_april_2021_global_covered_with_zero.nc
+          dst: dem_standard_deviation.nc
+          ini_key: topographyNC
+
+        dzRel0000:
+          src: /scratch/depfg/sutan101/data/pcrglobwb_input_arise/develop/global_05min/landSurface/topography/version_202104XX_from_merit_dem/maps_covered_with_zero/dzRel0000_topography_parameters_5min_april_2021_global_covered_with_zero.nc
+          dst: dzRel0000.nc
+          ini_key: relativeElevationFiles
+
+        dzRel0001:
+          src: /scratch/depfg/sutan101/data/pcrglobwb_input_arise/develop/global_05min/landSurface/topography/version_202104XX_from_merit_dem/maps_covered_with_zero/dzRel0001_topography_parameters_5min_april_2021_global_covered_with_zero.nc
+          dst: dzRel0001.nc
+          ini_key: relativeElevationFiles
+
+        dzRel0005:
+          src: /scratch/depfg/sutan101/data/pcrglobwb_input_arise/develop/global_05min/landSurface/topography/version_202104XX_from_merit_dem/maps_covered_with_zero/dzRel0005_topography_parameters_5min_april_2021_global_covered_with_zero.nc
+          dst: dzRel0005.nc
+          ini_key: relativeElevationFiles
+
+        dzRel0010:
+          src: /scratch/depfg/sutan101/data/pcrglobwb_input_arise/develop/global_05min/landSurface/topography/version_202104XX_from_merit_dem/maps_covered_with_zero/dzRel0010_topography_parameters_5min_april_2021_global_covered_with_zero.nc
+          dst: dzRel0010.nc
+          ini_key: relativeElevationFiles
+
+        dzRel0020:
+          src: /scratch/depfg/sutan101/data/pcrglobwb_input_arise/develop/global_05min/landSurface/topography/version_202104XX_from_merit_dem/maps_covered_with_zero/dzRel0020_topography_parameters_5min_april_2021_global_covered_with_zero.nc
+          dst: dzRel0020.nc
+          ini_key: relativeElevationFiles
+
+        dzRel0030:
+          src: /scratch/depfg/sutan101/data/pcrglobwb_input_arise/develop/global_05min/landSurface/topography/version_202104XX_from_merit_dem/maps_covered_with_zero/dzRel0030_topography_parameters_5min_april_2021_global_covered_with_zero.nc
+          dst: dzRel0030.nc
+          ini_key: relativeElevationFiles
+
+        dzRel0040:
+          src: /scratch/depfg/sutan101/data/pcrglobwb_input_arise/develop/global_05min/landSurface/topography/version_202104XX_from_merit_dem/maps_covered_with_zero/dzRel0040_topography_parameters_5min_april_2021_global_covered_with_zero.nc
+          dst: dzRel0040.nc
+          ini_key: relativeElevationFiles
+
+        dzRel0050:
+          src: /scratch/depfg/sutan101/data/pcrglobwb_input_arise/develop/global_05min/landSurface/topography/version_202104XX_from_merit_dem/maps_covered_with_zero/dzRel0050_topography_parameters_5min_april_2021_global_covered_with_zero.nc
+          dst: dzRel0050.nc
+          ini_key: relativeElevationFiles
+
+        dzRel0060:
+          src: /scratch/depfg/sutan101/data/pcrglobwb_input_arise/develop/global_05min/landSurface/topography/version_202104XX_from_merit_dem/maps_covered_with_zero/dzRel0060_topography_parameters_5min_april_2021_global_covered_with_zero.nc
+          dst: dzRel0060.nc
+          ini_key: relativeElevationFiles
+
+        dzRel0070:
+          src: /scratch/depfg/sutan101/data/pcrglobwb_input_arise/develop/global_05min/landSurface/topography/version_202104XX_from_merit_dem/maps_covered_with_zero/dzRel0070_topography_parameters_5min_april_2021_global_covered_with_zero.nc
+          dst: dzRel0070.nc
+          ini_key: relativeElevationFiles
+
+        dzRel0080:
+          src: /scratch/depfg/sutan101/data/pcrglobwb_input_arise/develop/global_05min/landSurface/topography/version_202104XX_from_merit_dem/maps_covered_with_zero/dzRel0080_topography_parameters_5min_april_2021_global_covered_with_zero.nc
+          dst: dzRel0080.nc
+          ini_key: relativeElevationFiles
+
+        dzRel0090:
+          src: /scratch/depfg/sutan101/data/pcrglobwb_input_arise/develop/global_05min/landSurface/topography/version_202104XX_from_merit_dem/maps_covered_with_zero/dzRel0090_topography_parameters_5min_april_2021_global_covered_with_zero.nc
+          dst: dzRel0090.nc
+          ini_key: relativeElevationFiles
+
+        dzRel0100:
+          src: /scratch/depfg/sutan101/data/pcrglobwb_input_arise/develop/global_05min/landSurface/topography/version_202104XX_from_merit_dem/maps_covered_with_zero/dzRel0100_topography_parameters_5min_april_2021_global_covered_with_zero.nc
+          dst: dzRel0100.nc
+          ini_key: relativeElevationFiles
+
+        orographyBeta:
+          src: /scratch/depfg/sutan101/data/pcrglobwb_input_arise/develop/global_05min/landSurface/topography/version_202104XX_from_merit_dem/maps_covered_with_zero/orographyBeta_topography_parameters_5min_april_2021_global_covered_with_zero.nc
+          dst: orographyBeta.nc
+          ini_key: topographyNC
+
+        slopeLength:
+          src: /scratch/depfg/sutan101/data/pcrglobwb_input_arise/develop/global_05min/landSurface/topography/version_202104XX_from_merit_dem/maps_covered_with_zero/slopeLength_topography_parameters_5min_april_2021_global_covered_with_zero.nc
+          dst: slopeLength.nc
+          ini_key: topographyNC
+
+        tanslope:
+          src: /scratch/depfg/sutan101/data/pcrglobwb_input_arise/develop/global_05min/landSurface/topography/version_202104XX_from_merit_dem/maps_covered_with_zero/tanslope_topography_parameters_5min_april_2021_global_covered_with_zero.nc
+          dst: tanslope.nc
+          ini_key: topographyNC
+
+        topography_parameters:
+          src: /scratch/depfg/sutan101/data/pcrglobwb_input_arise/develop/global_05min/landSurface/topography/version_202104XX_from_merit_dem/maps_covered_with_zero/topography_parameters_5min_april_2021_global_covered_with_zero.nc
+          dst: topography_parameters.nc
+          ini_key: topographyNC
 
     soil:
 
       properties:
         src: /scratch/depfg/sutan101/data/pcrglobwb_input_arise/develop/global_05min_from_gmd_paper_input/landSurface/soil/soilProperties5ArcMin.nc
-        dst: soilProperties5ArcMin.nc
+        dst: soilProperties.nc
         ini_key: soilPropertiesNC
 
     land_cover:
@@ -571,17 +678,17 @@ forcing:
 
       recession_coefficient:
         src: /scratch/depfg/sutan101/data/pcrglobwb_input_arise/develop/global_05min/groundwater/properties/version_2021-02-XX/recession_coefficient_05min.map
-        dst: recession_coefficient_05min.map
+        dst: recession_coefficient.map
         ini_key: recessionCoeff
 
       k_sat_aquifer:
         src: /scratch/depfg/sutan101/data/pcrglobwb_input_arise/develop/global_05min/groundwater/properties/version_2021-02-XX/k_conductivity_aquifer_05min.map
-        dst: k_conductivity_aquifer_05min.map
+        dst: k_conductivity_aquifer.map
         ini_key: kSatAquifer
 
       specific_yield:
         src: /scratch/depfg/sutan101/data/pcrglobwb_input_arise/develop/global_05min/groundwater/properties/version_2021-02-XX/specific_yield_aquifer_05min.map
-        dst: specific_yield_aquifer_05min.map
+        dst: specific_yield_aquifer.map
         ini_key: specificYield
 
       groundwater_alpha:
@@ -593,24 +700,24 @@ forcing:
 
       estimate:
         src: /scratch/depfg/sutan101/data/pcrglobwb_input_arise/develop/global_05min/groundwater/aquifer_thickness_estimate/version_2020-09-XX/thickness_05min_remapbil_to_30sec_filled_with_pcr_correct_lat_upscaled_back_to_05min_with_remapcon.nc
-        dst: aquifer_thickness_05min.nc
+        dst: aquifer_thickness.nc
         ini_key: estimateOfTotalGroundwaterThickness
 
   routing:
 
     ldd:
       src: /scratch/depfg/sutan101/data/pcrglobwb_input_arise/develop/global_05min/routing/surface_water_bodies/version_20210330/lddsound_05min_version_20210330.map
-      dst: lddsound_05min_version_20210330.map
+      dst: lddsound.map
       ini_key: lddMap
 
     water_bodies:
       src: /scratch/depfg/sutan101/data/pcrglobwb_input_arise/develop/global_05min/routing/surface_water_bodies/version_20210330/lakes_and_reservoirs_05min_global_version_20210330.nc
-      dst: lakes_and_reservoirs_05min_global_version_20210330.nc
+      dst: lakes_and_reservoirs.nc
       ini_key: waterBodyInputNC
 
     cell_area:
       src: /scratch/depfg/sutan101/data/pcrglobwb_input_arise/develop/global_05min/routing/cell_area/cdo_gridarea_clone_global_05min_correct_lats.nc
-      dst: cell_area_05min.nc
+      dst: cell_area.nc
       ini_key: cellAreaMap
     
     fraction_water:
@@ -676,7 +783,7 @@ forcing:
 
       population:
         src: /scratch/depfg/carde003/barry/pcrglobwb/calc_loadings/population_1980-2019_05min.nc
-        dst: population_1980-2019_05min.nc
+        dst: population_1980-2019.nc
         ini_key: PopulationNC
 
       industrial_manufacturing_factor:
@@ -686,12 +793,12 @@ forcing:
 
       urban_fraction:
         src: /scratch/depfg/carde003/barry/pcrglobwb/calc_loadings/urban_fraction_1970-2010_05min.nc
-        dst: urban_fraction_1970-2010_05min.nc
+        dst: urban_fraction_1970-2010.nc
         ini_key: UrbanFractionNC
 
       livestock_population:
         src: /scratch/depfg/carde003/barry/pcrglobwb/calc_loadings/livestock_population_1980-2019_05min.nc
-        dst: livestock_population_1980-2019_05min.nc
+        dst: livestock_population_1980-2019.nc
         ini_key: LivPopulationNC
 
       domestic_excretion_load:
@@ -728,7 +835,7 @@ forcing:
 
       background_salinity:
         src: /scratch/depfg/carde003/barry/pcrglobwb/loadings/Background_TDS_05min.nc
-        dst: Background_TDS_05min.nc
+        dst: Background_TDS.nc
         ini_key: backgroundSalinity
 
       total_suspended_solids:
@@ -764,7 +871,7 @@ forcing:
 
       area_historical:
         src: /scratch/depfg/sutan101/data/pcrglobwb_input_arise/develop/global_05min_from_gmd_paper_input/waterUse/irrigation/irrigated_areas/irrigationArea05ArcMin.nc
-        dst: irrigation_area_05min.nc
+        dst: irrigation_area.nc
         ini_key: historicalIrrigationArea
 
       surface_water_fraction:
@@ -781,12 +888,12 @@ forcing:
 
       groundwater_30min:
         src: /scratch/depfg/sutan101/data/pcrglobwb_input_arise/develop/global_05min_from_gmd_paper_input/waterUse/abstraction_zones/abstraction_zones_30min_05min.nc
-        dst: abstraction_zones_30min_05min.nc
+        dst: abstraction_zones_30min.nc
         ini_key: allocationSegmentsForGroundwater
 
       ground_surface_water_60min:
         src: /scratch/depfg/sutan101/data/pcrglobwb_input_arise/develop/global_05min_from_gmd_paper_input/waterUse/abstraction_zones/abstraction_zones_60min_05min.nc
-        dst: abstraction_zones_60min_05min.nc
+        dst: abstraction_zones_60min.nc
         ini_key: allocationSegmentsForGroundSurfaceWater
 
       withdrawal_points:
@@ -807,9 +914,111 @@ forcing:
     topography:
 
       merit_2021:
-        src: /scratch/depfg/sutan101/data/pcrglobwb_input_arise/develop/global_30sec/landSurface/topography/merit_dem_processed/version_2021-02-XX/maps_covered_with_zero
-        dst: merit_2021
-        ini_key: topographyNC, relativeElevationFiles, highResolutionDEM
+
+        dem_average:
+          src: /scratch/depfg/sutan101/data/pcrglobwb_input_arise/develop/global_30sec/landSurface/topography/merit_dem_processed/version_2021-02-XX/maps_covered_with_zero/dem_average_topography_parameters_30sec_february_2021_global_covered_with_zero.nc
+          dst: dem_average.nc
+          ini_key: highResolutionDEM
+
+        dem_maximum:
+          src: /scratch/depfg/sutan101/data/pcrglobwb_input_arise/develop/global_30sec/landSurface/topography/merit_dem_processed/version_2021-02-XX/maps_covered_with_zero/dem_maximum_topography_parameters_30sec_february_2021_global_covered_with_zero.nc
+          dst: dem_maximum.nc
+          ini_key: topographyNC
+
+        dem_minimum:
+          src: /scratch/depfg/sutan101/data/pcrglobwb_input_arise/develop/global_30sec/landSurface/topography/merit_dem_processed/version_2021-02-XX/maps_covered_with_zero/dem_minimum_topography_parameters_30sec_february_2021_global_covered_with_zero.nc
+          dst: dem_minimum.nc
+          ini_key: topographyNC
+
+        dem_standard_deviation:
+          src: /scratch/depfg/sutan101/data/pcrglobwb_input_arise/develop/global_30sec/landSurface/topography/merit_dem_processed/version_2021-02-XX/maps_covered_with_zero/dem_standard_deviation_topography_parameters_30sec_february_2021_global_covered_with_zero.nc
+          dst: dem_standard_deviation.nc
+          ini_key: topographyNC
+
+        dzRel0000:
+          src: /scratch/depfg/sutan101/data/pcrglobwb_input_arise/develop/global_30sec/landSurface/topography/merit_dem_processed/version_2021-02-XX/maps_covered_with_zero/dzRel0000_topography_parameters_30sec_february_2021_global_covered_with_zero.nc
+          dst: dzRel0000.nc
+          ini_key: relativeElevationFiles
+
+        dzRel0001:
+          src: /scratch/depfg/sutan101/data/pcrglobwb_input_arise/develop/global_30sec/landSurface/topography/merit_dem_processed/version_2021-02-XX/maps_covered_with_zero/dzRel0001_topography_parameters_30sec_february_2021_global_covered_with_zero.nc
+          dst: dzRel0001.nc
+          ini_key: relativeElevationFiles
+
+        dzRel0005:
+          src: /scratch/depfg/sutan101/data/pcrglobwb_input_arise/develop/global_30sec/landSurface/topography/merit_dem_processed/version_2021-02-XX/maps_covered_with_zero/dzRel0005_topography_parameters_30sec_february_2021_global_covered_with_zero.nc
+          dst: dzRel0005.nc
+          ini_key: relativeElevationFiles
+
+        dzRel0010:
+          src: /scratch/depfg/sutan101/data/pcrglobwb_input_arise/develop/global_30sec/landSurface/topography/merit_dem_processed/version_2021-02-XX/maps_covered_with_zero/dzRel0010_topography_parameters_30sec_february_2021_global_covered_with_zero.nc
+          dst: dzRel0010.nc
+          ini_key: relativeElevationFiles
+
+        dzRel0020:
+          src: /scratch/depfg/sutan101/data/pcrglobwb_input_arise/develop/global_30sec/landSurface/topography/merit_dem_processed/version_2021-02-XX/maps_covered_with_zero/dzRel0020_topography_parameters_30sec_february_2021_global_covered_with_zero.nc
+          dst: dzRel0020.nc
+          ini_key: relativeElevationFiles
+
+        dzRel0030:
+          src: /scratch/depfg/sutan101/data/pcrglobwb_input_arise/develop/global_30sec/landSurface/topography/merit_dem_processed/version_2021-02-XX/maps_covered_with_zero/dzRel0030_topography_parameters_30sec_february_2021_global_covered_with_zero.nc
+          dst: dzRel0030.nc
+          ini_key: relativeElevationFiles
+
+        dzRel0040:
+          src: /scratch/depfg/sutan101/data/pcrglobwb_input_arise/develop/global_30sec/landSurface/topography/merit_dem_processed/version_2021-02-XX/maps_covered_with_zero/dzRel0040_topography_parameters_30sec_february_2021_global_covered_with_zero.nc
+          dst: dzRel0040.nc
+          ini_key: relativeElevationFiles
+
+        dzRel0050:
+          src: /scratch/depfg/sutan101/data/pcrglobwb_input_arise/develop/global_30sec/landSurface/topography/merit_dem_processed/version_2021-02-XX/maps_covered_with_zero/dzRel0050_topography_parameters_30sec_february_2021_global_covered_with_zero.nc
+          dst: dzRel0050.nc
+          ini_key: relativeElevationFiles
+
+        dzRel0060:
+          src: /scratch/depfg/sutan101/data/pcrglobwb_input_arise/develop/global_30sec/landSurface/topography/merit_dem_processed/version_2021-02-XX/maps_covered_with_zero/dzRel0060_topography_parameters_30sec_february_2021_global_covered_with_zero.nc
+          dst: dzRel0060.nc
+          ini_key: relativeElevationFiles
+
+        dzRel0070:
+          src: /scratch/depfg/sutan101/data/pcrglobwb_input_arise/develop/global_30sec/landSurface/topography/merit_dem_processed/version_2021-02-XX/maps_covered_with_zero/dzRel0070_topography_parameters_30sec_february_2021_global_covered_with_zero.nc
+          dst: dzRel0070.nc
+          ini_key: relativeElevationFiles
+
+        dzRel0080:
+          src: /scratch/depfg/sutan101/data/pcrglobwb_input_arise/develop/global_30sec/landSurface/topography/merit_dem_processed/version_2021-02-XX/maps_covered_with_zero/dzRel0080_topography_parameters_30sec_february_2021_global_covered_with_zero.nc
+          dst: dzRel0080.nc
+          ini_key: relativeElevationFiles
+
+        dzRel0090:
+          src: /scratch/depfg/sutan101/data/pcrglobwb_input_arise/develop/global_30sec/landSurface/topography/merit_dem_processed/version_2021-02-XX/maps_covered_with_zero/dzRel0090_topography_parameters_30sec_february_2021_global_covered_with_zero.nc
+          dst: dzRel0090.nc
+          ini_key: relativeElevationFiles
+
+        dzRel0100:
+          src: /scratch/depfg/sutan101/data/pcrglobwb_input_arise/develop/global_30sec/landSurface/topography/merit_dem_processed/version_2021-02-XX/maps_covered_with_zero/dzRel0100_topography_parameters_30sec_february_2021_global_covered_with_zero.nc
+          dst: dzRel0100.nc
+          ini_key: relativeElevationFiles
+
+        orographyBeta:
+          src: /scratch/depfg/sutan101/data/pcrglobwb_input_arise/develop/global_30sec/landSurface/topography/merit_dem_processed/version_2021-02-XX/maps_covered_with_zero/orographyBeta_topography_parameters_30sec_february_2021_global_covered_with_zero.nc
+          dst: orographyBeta.nc
+          ini_key: topographyNC
+
+        slopeLength:
+          src: /scratch/depfg/sutan101/data/pcrglobwb_input_arise/develop/global_30sec/landSurface/topography/merit_dem_processed/version_2021-02-XX/maps_covered_with_zero/slopeLength_topography_parameters_30sec_february_2021_global_covered_with_zero.nc
+          dst: slopeLength.nc
+          ini_key: topographyNC
+
+        tanslope:
+          src: /scratch/depfg/sutan101/data/pcrglobwb_input_arise/develop/global_30sec/landSurface/topography/merit_dem_processed/version_2021-02-XX/maps_covered_with_zero/tanslope_topography_parameters_30sec_february_2021_global_covered_with_zero.nc
+          dst: tanslope.nc
+          ini_key: topographyNC
+
+        topography_parameters:
+          src: /scratch/depfg/sutan101/data/pcrglobwb_input_arise/develop/global_30sec/landSurface/topography/merit_dem_processed/version_2021-02-XX/maps_covered_with_zero/topography_parameters_30sec_february_2021_global_covered_with_zero.nc
+          dst: topography_parameters.nc
+          ini_key: topographyNC
 
     soil:
 
@@ -944,41 +1153,41 @@ forcing:
 
       recession_coefficient:
         src: /scratch/depfg/sutan101/data/pcrglobwb_input_arise/develop/global_30sec/groundwater/properties/version_202102XX/recession_coefficient_30sec.nc
-        dst: recession_coefficient_30sec.nc
+        dst: recession_coefficient.nc
         ini_key: recessionCoeff
 
       k_sat_aquifer:
         src: /scratch/depfg/sutan101/data/pcrglobwb_input_arise/develop/global_30sec/groundwater/properties/version_202102XX/k_conductivity_aquifer_filled_30sec.nc
-        dst: k_conductivity_aquifer_filled_30sec.nc
+        dst: k_conductivity_aquifer_filled.nc
         ini_key: kSatAquifer
 
       specific_yield:
         src: /scratch/depfg/sutan101/data/pcrglobwb_input_arise/develop/global_30sec/groundwater/properties/version_202102XX/specific_yield_aquifer_filled_30sec.nc
-        dst: specific_yield_aquifer_filled_30sec.nc
+        dst: specific_yield_aquifer_filled.nc
         ini_key: specificYield
 
     aquifer_thickness:
 
       estimate:
         src: /scratch/depfg/sutan101/data/pcrglobwb_input_arise/develop/global_30sec/groundwater/aquifer_thickness_estimate/version_2020-09-XX/thickness_05min_remapbil_to_30sec_filled_with_pcr_correct_lat.nc
-        dst: aquifer_thickness_30sec.nc
+        dst: aquifer_thickness.nc
         ini_key: estimateOfTotalGroundwaterThickness
 
   routing:
 
     ldd:
       src: /archive/depfg/7006713/_chapter1/data/pcrglob_30sec_global/other/lddsound_30sec_version_202005XX_correct_lat_mv255.nc
-      dst: lddsound_30sec_version_202005XX_correct_lat.nc
+      dst: lddsound.nc
       ini_key: lddMap
 
     water_bodies:
       src: /scratch/depfg/sutan101/data/pcrglobwb_input_arise/develop/global_30sec/routing/surface_water_bodies/version_2020-05-XX/lakes_and_reservoirs_30sec_global_2019_version_202005XX.nc
-      dst: lakes_and_reservoirs_30sec_global_2019_version_202005XX.nc
+      dst: lakes_and_reservoirs.nc
       ini_key: waterBodyInputNC
 
     cell_area:
       src: /scratch/depfg/sutan101/data/pcrglobwb_input_arise/develop/global_30sec/routing/cell_area/cdo_grid_area_30sec_map_correct_lat.nc
-      dst: cell_area_30sec.nc
+      dst: cell_area.nc
       ini_key: cellAreaMap
 
     inverted_dem:
@@ -1003,13 +1212,6 @@ forcing:
         dst: bankfull_width.nc
         ini_key: constantChannelWidth, minimumChannelWidth
 
-  meteo:
-
-    downscale_ids:
-      src: /scratch/depfg/sutan101/data/pcrglobwb_input_arise/develop/global_30sec/meteo/unique_ids/unique_ids_5_arcmin_correct_lats.nc
-      dst: unique_ids_5_arcmin.nc
-      ini_key: meteoDownscaleIds
-
 
 qualloc:
 
@@ -1019,57 +1221,57 @@ qualloc:
 
       precipitation:
         src: /scratch/depfg/carde003/barry/qualloc/netcdf/precipitation_monthTot_1980_2019_m_month_05arcmin.nc
-        dst: precipitation_monthTot_1980_2019_m_month_05arcmin.nc
+        dst: precipitation_monthTot_1980_2019_m_month.nc
         ini_key: precipitation_ncfile
 
       refpot_evaporation:
         src: /scratch/depfg/carde003/barry/qualloc/netcdf/referencePotET_monthTot_1980_2019_m_month_05arcmin.nc
-        dst: referencePotET_monthTot_1980_2019_m_month_05arcmin.nc
+        dst: referencePotET_monthTot_1980_2019_m_month.nc
         ini_key: refpot_evaporation_ncfile
 
       groundwater_recharge:
         src: /scratch/depfg/carde003/barry/qualloc/netcdf/gwRecharge_monthTot_1980_2019_m_month_05arcmin.nc
-        dst: gwRecharge_monthTot_1980_2019_m_month_05arcmin.nc
+        dst: gwRecharge_monthTot_1980_2019_m_month.nc
         ini_key: groundwater_recharge_ncfile
 
       direct_runoff:
         src: /scratch/depfg/carde003/barry/qualloc/netcdf/directRunoff_monthTot_1980_2019_m_month_05arcmin.nc
-        dst: directRunoff_monthTot_1980_2019_m_month_05arcmin.nc
+        dst: directRunoff_monthTot_1980_2019_m_month.nc
         ini_key: direct_runoff_ncfile
 
       interflow:
         src: /scratch/depfg/carde003/barry/qualloc/netcdf/interflowTotal_monthTot_1980_2019_m_month_05arcmin.nc
-        dst: interflowTotal_monthTot_1980_2019_m_month_05arcmin.nc
+        dst: interflowTotal_monthTot_1980_2019_m_month.nc
         ini_key: interflow_ncfile
 
       irrigation_water_demand:
         src: /scratch/depfg/carde003/barry/qualloc/netcdf/irrigation_water_demand_1980_2019_m_day_05arcmin.nc
-        dst: irrigation_water_demand_1980_2019_m_day_05arcmin.nc
+        dst: irrigation_water_demand_1980_2019_m_day.nc
         ini_key: irrigation_water_demand_ncfile
 
       domestic_water_demand:
         src: /scratch/depfg/carde003/barry/qualloc/netcdf/domestic_water_demand_1980_2019_m_day_05arcmin.nc
-        dst: domestic_water_demand_1980_2019_m_day_05arcmin.nc
+        dst: domestic_water_demand_1980_2019_m_day.nc
         ini_key: domestic_water_demand_ncfile
 
       livestock_water_demand:
         src: /scratch/depfg/carde003/barry/qualloc/netcdf/livestock_water_demand_1980_2019_m_day_05arcmin.nc
-        dst: livestock_water_demand_1980_2019_m_day_05arcmin.nc
+        dst: livestock_water_demand_1980_2019_m_day.nc
         ini_key: livestock_water_demand_ncfile
 
       manufacture_water_demand:
         src: /scratch/depfg/carde003/barry/qualloc/netcdf/manufacture_water_demand_1980_2019_m_day_05arcmin.nc
-        dst: manufacture_water_demand_1980_2019_m_day_05arcmin.nc
+        dst: manufacture_water_demand_1980_2019_m_day.nc
         ini_key: manufacture_water_demand_ncfile
 
       thermoelectric_water_demand:
         src: /scratch/depfg/carde003/barry/qualloc/netcdf/thermoelectric_water_demand_1980_2019_m_day_05arcmin.nc
-        dst: thermoelectric_water_demand_1980_2019_m_day_05arcmin.nc
+        dst: thermoelectric_water_demand_1980_2019_m_day.nc
         ini_key: thermoelectric_water_demand_ncfile
 
       desalinated_water_use:
         src: /scratch/depfg/carde003/barry/qualloc/netcdf/desalinated_water_use_1945_2021_m_day_05arcmin.nc
-        dst: desalinated_water_use_1945_2021_m_day_05arcmin.nc
+        dst: desalinated_water_use_1945_2021_m_day.nc
         ini_key: desalinated_water_use
 
       regional_pumping_capacity:

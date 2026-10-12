@@ -1,12 +1,37 @@
 # Test case domains. 
 # Per test case:
-#   outlet   [lon, lat] of the basin mouth (required). Approximate is fine.
+#   outlets  list of [lon, lat] basin mouths (required). Approximate is fine: each
+#            snaps to the largest LDD pit within `snap` deg (default 0.25). The
+#            domain is the union of their catchments. Where the mouths differ between
+#            LDDs, give a mapping of resolution to list instead.
 #   search   [west, east, south, north] window the delineation runs in (default:
-#            outlet +/- 5 deg). Must contain the whole basin.
+#            outlets +/- 5 deg). Must contain the whole domain.
+#   sub_basins  maximum number of sub-basins to split the domain into (optional).
+#            Each outlet's main stem is cut where its largest tributaries join, the
+#            largest first across all outlets. Written to clone_maps/sub_basins/<res>/:
+#            clone and mask per sub-basin (<name>_<res>_<batch>_<n>, e.g.
+#            rhine_5arcminutes_2_1), plus one .txt table and one .png.
+#            <batch> is the run order: run every 1_* (headwaters) first, then every
+#            2_*, and so on; everything upstream of a sub-basin is in an earlier batch.
+#            The table also gives the sub-basin each one drains into, its outlet cell
+#            (the only cell its water leaves through) and the inlet cell in the
+#            downstream sub-basin that the outlet flows into, for handing over
+#            discharge. The map shades them by batch.
 
 
 # Tugela (Thukela), KwaZulu-Natal, South Africa: drains the Drakensberg
 # escarpment east into the Indian Ocean, ~29,000 km2.
 tugela:
-  outlet: [31.4583, -29.2083]
+  outlets: [[31.4583, -29.2083]]
   search: [26.0, 34.0, -33.0, -25.0]
+
+# Rhine and Meuse, ~197,000 km2. In the 5 arcmin and 30 arcsec LDDs the Rhine
+# reaches the North Sea at Hoek van Holland and the Meuse ends in an inland pit
+# near Moerdijk; in the 30 arcmin LDD the Meuse reaches the sea in Zeeland.
+rhine:
+  outlets:
+    5arcminutes: [[4.12, 51.98], [4.77, 51.71]]
+    30arcseconds: [[4.12, 51.98], [4.77, 51.71]]
+    30arcminutes: [[4.25, 52.25], [3.75, 51.75]]
+  search: [1.0, 14.0, 44.0, 55.0]
+  sub_basins: 6
